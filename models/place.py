@@ -67,5 +67,7 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, obj):
             """adds an ammenity to list"""
+            from models import storage
             if isinstance(obj, Amenity):
                 self.amenity_ids.append(obj.id)
+                storage.new(obj)
