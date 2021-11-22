@@ -12,7 +12,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-mapped_classes = (City, State)
+mapped_classes = (City, State, User, Place, Amenity, Review)
 
 
 class DBStorage:
@@ -33,7 +33,7 @@ class DBStorage:
 
     def all(self, cls=None):
         """Returns a dictionaary of all objects in DB"""
-        if cls:
+        if cls in mapped_classes:
             return {"{}.{}".format(cls.__name__, item.id): item
                     for item in self.__session.query(cls)}
         else:
@@ -45,7 +45,8 @@ class DBStorage:
 
     def new(self, obj):
         """adds an object to the session"""
-        self.__session.add(obj)
+        if type(obj) in mapped_classes:
+            self.__session.add(obj)
 
     def save(self):
         """commits the changes in  the current session"""
@@ -53,7 +54,7 @@ class DBStorage:
 
     def delete(self, obj=None):
         """deletes an object from the session"""
-        if obj:
+        if obj in self.all(type(obj).values()):
             self.__session.delete(obj)
 
     def reload(self):

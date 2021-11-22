@@ -19,5 +19,5 @@ class State(BaseModel, Base):
         def cities(self):
             """getter for cities list when using filestorage"""
             from models import storage
-            return [city for city in storage.all("City").values()
+            return [city for city in storage.all(City).values()
                     if city.state_id == self.id]
