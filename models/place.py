@@ -40,6 +40,7 @@ class Place(BaseModel, Base):
                             default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    amenity_ids = []
 
     if getenv('HBNB_TYPE_STORAGE') == "db":
         reviews = relationship('Review',
@@ -61,10 +62,10 @@ class Place(BaseModel, Base):
             """getter for amenity list when using filestorage"""
             from models import storage
             return [amenity for amenity in storage.all(Amenity).values()
-                    if amenity.place_id == self.id]
+                    if amenity.id in self.amenity_ids]
 
         @amenities.setter
         def amenities(self, obj):
             """adds an ammenity to list"""
             if isinstance(obj, Amenity):
-                self.append(obj)
+                self.amenity_ids.append(obj.id)
