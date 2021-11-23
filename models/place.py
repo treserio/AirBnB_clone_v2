@@ -48,7 +48,9 @@ class Place(BaseModel, Base):
                                backref='place')
         amenities = relationship('Amenity',
                                  secondary="place_amenity",
-                                 viewonly=False)
+                                 viewonly=False,
+                                 overlaps="place_amenities"
+                                 )
     else:
         @property
         def reviews(self):
