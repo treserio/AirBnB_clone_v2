@@ -17,13 +17,13 @@ class test_basemodel(unittest.TestCase):
         self.name = 'BaseModel'
         self.value = BaseModel
         self.dict = {}
-        self.state = State({'name': "test_state"})
-        self.city = City({'state_id': self.state.id, 'name': "test_city"})
-        self.user = User({'email': "test@test.net",
-                          'password': "test_password"})
-        self.place = Place({'city_id': self.city.id, 'user_id': self.user.id,
-                            'description': "", 'latitude': 0.0,
-                            'longitude': 0.0, 'name': 'test_place'})
+        self.state = State(**{'name': "test_state"})
+        self.city = City(**{'state_id': self.state.id, 'name': "test_city"})
+        self.user = User(**{'email': "test@test.net",
+                            'password': "test_password"})
+        self.place = Place(**{'city_id': self.city.id, 'user_id': self.user.id,
+                              'description': "", 'latitude': 0.0,
+                              'longitude': 0.0, 'name': 'test_place'})
 
     def setUp(self):
         """pre-test actions"""
@@ -84,12 +84,11 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
-    @unittest.skip("test no longer relevant")
     def test_kwargs_one(self):
         """kwargs with one value, prev failed"""
         n = {'Name': 'test'}
         new = self.value(**n)
-        self.assertIsInstance(new, BaseModel)
+        self.assertIsInstance(new, self.value)
 
     def test_id(self):
         """confirm id is a str"""
