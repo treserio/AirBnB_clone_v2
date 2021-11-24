@@ -49,7 +49,7 @@ class Place(BaseModel, Base):
         amenities = relationship('Amenity',
                                  secondary="place_amenity",
                                  viewonly=False,
-                                 overlaps="place_amenities"
+                                 backref="place_amenity"
                                  )
     else:
         @property
@@ -72,4 +72,4 @@ class Place(BaseModel, Base):
             from models import storage
             if isinstance(obj, Amenity):
                 self.amenity_ids.append(obj.id)
-                storage.new(obj)
+                # storage.new(obj)
