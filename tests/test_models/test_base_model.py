@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" """
-from models.base_model import Base
+"""Module for testing BaseModel Class"""
 from models import BaseModel, City, Place, State, User
 import unittest
 import datetime
@@ -10,10 +9,10 @@ import os
 
 
 class test_basemodel(unittest.TestCase):
-    """ """
+    """BaseModel testing"""
 
     def __init__(self, *args, **kwargs):
-        """ """
+        """Init for basemodel testing"""
         super().__init__(*args, **kwargs)
         self.name = 'BaseModel'
         self.value = BaseModel
@@ -27,30 +26,29 @@ class test_basemodel(unittest.TestCase):
                             'longitude': 0.0, 'name': 'test_place'})
 
     def setUp(self):
-        """ """
+        """pre-test actions"""
         pass
 
     def tearDown(self):
-        from models import storage
         try:
             os.remove('file.json')
         except Exception:
             pass
 
     def test_default(self):
-        """ """
+        """type of initialized class"""
         i = self.value(**self.dict)
         self.assertEqual(type(i), self.value)
 
     def test_kwargs(self):
-        """ """
+        """kwargs creation with a copy """
         i = self.value(**self.dict)
         copy = i.to_dict()
         new = BaseModel(**copy)
         self.assertFalse(new is i)
 
     def test_kwargs_int(self):
-        """ """
+        """try creating with incorrect kwargs """
         i = self.value(**self.dict)
         copy = i.to_dict()
         copy.update({1: 2})
@@ -69,42 +67,42 @@ class test_basemodel(unittest.TestCase):
             self.assertEqual(j[key], i.to_dict())
 
     def test_str(self):
-        """ """
+        """str method"""
         i = self.value(**self.dict)
         self.assertEqual(str(i), '[{}] ({}) {}'.format(self.name, i.id,
                          i.__dict__))
 
     def test_todict(self):
-        """ """
+        """to_dict method"""
         i = self.value(**self.dict)
         n = i.to_dict()
         self.assertEqual(i.to_dict(), n)
 
     def test_kwargs_none(self):
-        """ """
+        """test creation with None for Kwarg key:value"""
         n = {None: None}
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
     @unittest.skip("test no longer relevant")
     def test_kwargs_one(self):
-        """ """
+        """kwargs with one value, prev failed"""
         n = {'Name': 'test'}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
+        new = self.value(**n)
+        self.assertIsInstance(new, BaseModel)
 
     def test_id(self):
-        """ """
+        """confirm id is a str"""
         new = self.value(**self.dict)
         self.assertEqual(type(new.id), str)
 
     def test_created_at(self):
-        """ """
+        """conform created_at is datetime"""
         new = self.value(**self.dict)
         self.assertEqual(type(new.created_at), datetime.datetime)
 
     def test_updated_at(self):
-        """ """
+        """confirm updated_at is datetime & is updated when needed"""
         new = self.value(**self.dict)
         self.assertEqual(type(new.updated_at), datetime.datetime)
         n = new.to_dict()

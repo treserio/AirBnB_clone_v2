@@ -72,4 +72,3 @@ class Place(BaseModel, Base):
             from models import storage
             if isinstance(obj, Amenity):
                 self.amenity_ids.append(obj.id)
-                # storage.new(obj)
