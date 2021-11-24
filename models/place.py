@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from models.review import Review
 from models.amenity import Amenity
-from os import getenv
+import os
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
@@ -42,16 +42,17 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     amenity_ids = []
 
-    if getenv('HBNB_TYPE_STORAGE') == "db":
+    try:
+        os.environ['HBNB_TYPE_STORAGE'] == "db"
         reviews = relationship('Review',
                                cascade="all, delete, delete-orphan",
                                backref='place')
         amenities = relationship('Amenity',
                                  secondary="place_amenity",
                                  viewonly=False,
-                                 backref="place_amenity"
+                                 backref="place_amenities"
                                  )
-    else:
+    except Exception:
         @property
         def reviews(self):
             """getter for review list when using filestorage"""

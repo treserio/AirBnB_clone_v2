@@ -13,6 +13,7 @@ import MySQLdb
 class test_db_storage(unittest.TestCase):
     """MySQL db tests"""
 
+    @classmethod
     def setUpClass(cls):
         cls.db = MySQLdb.connect(host=os.getenv('HBNB_MYSQL_HOST'),
                                  user=os.getenv('HBNB_MYSQL_USER'),
@@ -22,6 +23,7 @@ class test_db_storage(unittest.TestCase):
                                  )
         cls.cur = cls.db.cursor()
 
+    @classmethod
     def tearDownClass(cls):
         cls.cur.close()
         cls.db.close()
@@ -32,4 +34,4 @@ class test_db_storage(unittest.TestCase):
 
     def test_access(self):
         self.cur.execute("SELECT * from states")
-        self.assertTrue(self.cur.fetchall())
+        self.assertTrue(self.cur.fetchall() != None)
