@@ -33,15 +33,15 @@ class DBStorage:
 
     def all(self, cls=None):
         """Returns a dictionaary of all objects in DB"""
+        objs = {}
         if cls in mapped_classes:
-            return {"{}.{}".format(cls.__name__, item.id): item
-                    for item in self.__session.query(cls)}
-        else:
-            objs = {}
+            objs.update({"{}.{}".format(cls.__name__, item.id): item
+                         for item in self.__session.query(cls)})
+        elif cls == None:
             for c in mapped_classes:
                 objs.update({"{}.{}".format(c.__name__, item.id): item
                              for item in self.__session.query(c)})
-            return objs
+        return objs
 
     def new(self, obj):
         """adds an object to the session"""

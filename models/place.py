@@ -42,8 +42,7 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     amenity_ids = []
 
-    try:
-        os.environ['HBNB_TYPE_STORAGE'] == "db"
+    if os.getenv('HBNB_TYPE_STORAGE') == "db":
         reviews = relationship('Review',
                                cascade="all, delete, delete-orphan",
                                backref='place')
@@ -52,7 +51,7 @@ class Place(BaseModel, Base):
                                  viewonly=False,
                                  backref="place_amenities"
                                  )
-    except Exception:
+    else:
         @property
         def reviews(self):
             """getter for review list when using filestorage"""
