@@ -53,8 +53,11 @@ class TestColsole(unittest.TestCase):
         '''Confirm console ends as expected'''
         with self.assertRaises(SystemExit):
             self.con.do_quit()
+        with self.assertRaises(SystemExit):
             self.con.onecmd('quit')
+        with self.assertRaises(SystemExit):
             self.con.do_EOF()
+        with self.assertRaises(SystemExit):
             self.con.onecmd('EOF')
 
     def test_emptyline(self):
@@ -272,5 +275,3 @@ class TestColsole(unittest.TestCase):
         sys.stdout = out3
         self.con.do_all('Amenity')
         self.assertNotEqual(out2.getvalue(), out3.getvalue())
-
-# update & default nice! help apparently too
