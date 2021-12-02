@@ -37,7 +37,7 @@ class DBStorage:
         if cls in mapped_classes:
             objs.update({"{}.{}".format(cls.__name__, item.id): item
                          for item in self.__session.query(cls)})
-        elif cls == None:
+        elif cls is None:
             for c in mapped_classes:
                 objs.update({"{}.{}".format(c.__name__, item.id): item
                              for item in self.__session.query(c)})

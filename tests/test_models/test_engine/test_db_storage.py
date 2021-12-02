@@ -34,4 +34,4 @@ class test_db_storage(unittest.TestCase):
 
     def test_access(self):
         self.cur.execute("SELECT * from states")
-        self.assertTrue(self.cur.fetchall() != None)
+        self.assertTrue(self.cur.fetchall() is not None)
