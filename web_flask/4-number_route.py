@@ -27,7 +27,7 @@ def s_python_text(text='is cool'):
 
 
 @app.route('/number/<n>', strict_slashes=False)
-def s_c_text(n):
+def s_number_n(n):
     if type(n) == int:
         return '{} is a number'.format(n)
 
