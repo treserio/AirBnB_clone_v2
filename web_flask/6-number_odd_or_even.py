@@ -38,6 +38,6 @@ if __name__ == '__main__':
             val = 'odd'
         else:
             val = 'even'
-        return render_template('6-number_oddor_even.html', n=n, val=val)
+        return render_template('6-number_odd_or_even.html', n=n, val=val)
 
     app.run(debug=True, host='0.0.0.0')
