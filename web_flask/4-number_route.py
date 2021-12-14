@@ -29,7 +29,7 @@ def s_python_text(text='is cool'):
 @app.route('/number/<n>', strict_slashes=False)
 def s_c_text(n):
     if type(n) == int:
-        return 'n is a number'
+        return '{} is a number'.format(n)
 
 
 if __name__ == '__main__':
