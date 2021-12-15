@@ -16,9 +16,9 @@ if __name__ == '__main__':
     @app.route('/hbnb_filters')
     def s_hbnbFilters():
         return render_template(
-            '10-hnb_filters.html',
-            st=models.storage.all(models.State),
-            amnty=models.storage.all(models.Amenity)
+            '10-hbnb_filters.html',
+            db_st=models.storage.all(models.State),
+            db_amnty=models.storage.all(models.Amenity)
         )
 
     app.run(host='0.0.0.0', port='5000')

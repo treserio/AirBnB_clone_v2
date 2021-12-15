@@ -25,11 +25,11 @@
                 <ul class="popover">
                     {% for st in db_st.values() | sort(attribute='name') %}
                     <li>
-                        <h2>{% st.name %}</h2>
+                        <h2>{{ st.name }}</h2>
                         {% for ct in st.cities | sort(attribute='name') %}
                         <ul>
                             <li>
-                                <h4>{% ct.name %}</h4>
+                                <h4>{{ ct.name }}</h4>
                             </li>
                         </ul>
                         {% endfor %}
@@ -43,7 +43,7 @@
                 <ul class="popover">
                     {% for am in db_amnty.values() | sort(attribute="name") %}
                     <li>
-                        <h4>{% am.name %}</h4>
+                        <h4>{{ am.name }}</h4>
                     </li>
                     {% endfor %}
                 </ul>
