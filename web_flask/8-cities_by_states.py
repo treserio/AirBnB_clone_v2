@@ -15,7 +15,7 @@ if __name__ == '__main__':
         storage.close()
 
     @app.route('/cities_by_states')
-    def citiesByStates():
+    def s_citiesByStates():
         return render_template('8-cities_by_states.html',
                                States=storage.all(State))
 

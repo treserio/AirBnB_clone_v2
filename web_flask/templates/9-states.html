@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<HTML lang="en">
+
+<HEAD>
+    <TITLE>HBNB</TITLE>
+</HEAD>
+
+<BODY>
+    {% if States is iterable %}
+    <H1>States</H1>
+    <UL id="States">
+        {% for st in States.values() | sort(attribute="name") %}
+        <LI>{{ st.id }}: <B>{{ st.name }}</B></LI>
+        {% endfor %}
+    </UL>
+    {% elif States != None %}
+    <H1>State: {{ States.name }}</H1>
+    <H3>Cities:</H3>
+    <UL id='Cities'>
+        {% for ct in States.cities | sort(attribute="name") %}
+        <LI>{{ ct.id }}: <B>{{ ct.name }}</B></LI>
+        {% endfor %}
+    </UL>
+    {% else %}
+    <H1>Not Found!</H1>
+    {% endif %}
+</BODY>
+
+</HTML>

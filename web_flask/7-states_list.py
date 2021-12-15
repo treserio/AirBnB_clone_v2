@@ -16,7 +16,7 @@ def teardown(context):
 
 
 @app.route('/states_list')
-def statesList():
+def s_statesList():
     ls = storage.all(State)
     return render_template('7-states_list.html', States=ls)
 
