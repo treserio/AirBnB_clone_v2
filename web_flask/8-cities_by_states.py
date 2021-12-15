@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     @app.route('/cities_by_states')
     def citiesByStates():
-        ls = storage.all(State)
-        return render_template('7-states_list.html', States=ls)
+        return render_template('8-cities_by_states.html',
+                               States=storage.all(State))
 
     app.run(host='0.0.0.0', port='5000')
