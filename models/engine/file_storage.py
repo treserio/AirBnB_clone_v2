@@ -58,3 +58,7 @@ class FileStorage:
         if obj:
             obj_key = obj.__class__.__name__ + "." + obj.id
             self.__objects.pop(obj_key, None)
+
+    def close(self):
+        '''close for fs'''
+        pass
